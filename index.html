@@ -3,8 +3,335 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>アットパーキング - 月極駐車場検索サイト</title>
+  <title>月極駐車場のオンライン契約ならアットパーキング</title>
   <meta name="description" content="月極駐車場をお探しならアットパーキングにお任せください！">
+  <style>
+    /* Reset CSS */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: "Hiragino Kaku Gothic ProN", "メイリオ", sans-serif;
+      color: #333;
+      line-height: 1.6;
+    }
+    
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+    
+    /* Header styles */
+    header {
+      padding: 15px 0;
+    }
+    
+    .header-text {
+      font-size: 12px;
+      color: #666;
+      margin-bottom: 10px;
+    }
+    
+    .logo {
+      max-width: 350px;
+    }
+    
+    /* Navigation */
+    .main-nav {
+      background-color: #6cb80d;
+      padding: 10px 0;
+    }
+    
+    .nav-list {
+      display: flex;
+      justify-content: center;
+      list-style: none;
+    }
+    
+    .nav-item {
+      padding: 5px 15px;
+      color: white;
+      font-size: 14px;
+      border-right: 1px solid #5ca20a;
+    }
+    
+    .nav-item:first-child {
+      border-left: 1px solid #5ca20a;
+    }
+    
+    /* Main section */
+    .main-heading {
+      text-align: center;
+      margin: 30px 0;
+      font-size: 24px;
+      color: #444;
+      font-weight: normal;
+    }
+    
+    .search-section {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 40px;
+    }
+    
+    .search-box {
+      border: 2px solid #6cb80d;
+      padding: 15px;
+      width: 60%;
+      position: relative;
+    }
+    
+    .search-heading {
+      font-size: 18px;
+      color: #333;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .search-icon {
+      width: 30px;
+      margin-right: 10px;
+    }
+    
+    .search-text {
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+    
+    .current-parking {
+      background-color: #6cb80d;
+      color: white;
+      padding: 8px 15px;
+      font-size: 14px;
+      text-align: center;
+    }
+    
+    .parking-count {
+      border: 1px solid #ccc;
+      padding: 8px 15px;
+      margin-top: 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .count-number {
+      color: #ff6600;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    
+    .japan-map {
+      width: 38%;
+      position: relative;
+    }
+    
+    .map-image {
+      width: 100%;
+    }
+    
+    .region-links {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+    }
+    
+    /* Region sections */
+    .regions {
+      display: flex;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+    
+    .region {
+      width: 33.33%;
+      margin-bottom: 20px;
+    }
+    
+    .region-title {
+      background-color: #ff6600;
+      color: white;
+      padding: 5px 10px;
+      font-size: 16px;
+      margin-bottom: 10px;
+      text-align: center;
+      max-width: 200px;
+    }
+    
+    .region.kanto .region-title {
+      background-color: #ff9900;
+    }
+    
+    .region.tohoku .region-title {
+      background-color: #66ccff;
+    }
+    
+    .region.hokkaido .region-title {
+      background-color: #99ccff;
+    }
+    
+    .region.koushinetsu .region-title {
+      background-color: #99cc66;
+    }
+    
+    .region.tokai .region-title {
+      background-color: #0099cc;
+    }
+    
+    .region.kinki .region-title {
+      background-color: #ff9900;
+    }
+    
+    .region.chugoku .region-title {
+      background-color: #cc6633;
+    }
+    
+    .region.kyushu .region-title {
+      background-color: #9966cc;
+    }
+    
+    .region.shikoku .region-title {
+      background-color: #cc66cc;
+    }
+    
+    .region.okinawa .region-title {
+      background-color: #ff9966;
+    }
+    
+    .prefecture-list {
+      display: flex;
+      flex-wrap: wrap;
+      list-style: none;
+    }
+    
+    .prefecture-item {
+      margin-right: 10px;
+      margin-bottom: 5px;
+    }
+    
+    .prefecture-link {
+      color: #333;
+      font-size: 14px;
+      text-decoration: underline;
+    }
+    
+    /* Search help section */
+    .search-help {
+      margin-bottom: 40px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .help-icon {
+      width: 80px;
+      margin-right: 20px;
+    }
+    
+    .help-content {
+      flex: 1;
+    }
+    
+    .help-title {
+      font-size: 20px;
+      margin-bottom: 10px;
+      color: #444;
+    }
+    
+    .help-text {
+      font-size: 14px;
+      line-height: 1.8;
+    }
+    
+    /* Side banners */
+    .side-banners {
+      width: 38%;
+    }
+    
+    .banner {
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      overflow: hidden;
+    }
+    
+    .banner img {
+      width: 100%;
+      display: block;
+    }
+    
+    .map-search {
+      border: 1px solid #ccc;
+      padding: 15px;
+      margin-bottom: 20px;
+    }
+    
+    .map-search-title {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+    
+    .map-search-icon {
+      width: 24px;
+      vertical-align: middle;
+      margin-right: 5px;
+    }
+    
+    .map-container {
+      width: 100%;
+      height: 200px;
+      background-color: #eee;
+      margin-bottom: 15px;
+    }
+    
+    .map-input-label {
+      display: block;
+      font-size: 12px;
+      margin-bottom: 5px;
+      text-align: center;
+    }
+    
+    .map-input {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+    }
+    
+    .map-button {
+      display: block;
+      width: 100%;
+      background-color: #ff6600;
+      color: white;
+      border: none;
+      padding: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    
+    /* Dify Chatbot Styles */
+    #dify-chatbot-bubble-button {
+      background-color: #1C64F2 !important;
+    }
+    
+    #dify-chatbot-bubble-window {
+      width: 24rem !important;
+      height: 40rem !important;
+    }
+  </style>
+  
+  <!-- Dify Chatbot -->
   <script>
     window.difyChatbotConfig = {
       token: 'InqwmyTUlceW5pJC',
@@ -12,61 +339,178 @@
     }
   </script>
   <script src="https://dify.animastudio.jp/embed.min.js" id="InqwmyTUlceW5pJC" defer></script>
-  <style>
-    #dify-chatbot-bubble-button {
-      background-color: #1C64F2 !important;
-    }
-    #dify-chatbot-bubble-window {
-      width: 24rem !important;
-      height: 40rem !important;
-    }
-    body {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      line-height: 1.6;
-      color: #333;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-    header {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-    h1 {
-      color: #1C64F2;
-    }
-    .message {
-      background-color: #f9f9f9;
-      border-radius: 8px;
-      padding: 20px;
-      margin-bottom: 20px;
-      text-align: center;
-    }
-    .redirect-link {
-      display: inline-block;
-      background-color: #1C64F2;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 4px;
-      text-decoration: none;
-      margin-top: 20px;
-    }
-    .redirect-link:hover {
-      background-color: #1650c4;
-    }
-  </style>
 </head>
 <body>
   <header>
-    <h1>アットパーキング</h1>
-    <p>月極駐車場検索サイト</p>
+    <div class="container">
+      <p class="header-text">月極駐車場のオンライン契約ならアットパーキング</p>
+      <img src="https://www.at-parking.jp/img/common/logo.png" alt="アットパーキング" class="logo">
+    </div>
   </header>
-
-  <div class="message">
-    <h2>サイトは準備中です</h2>
-    <p>現在、サイトの準備を進めています。少々お待ちください。</p>
-    <p>チャットボットをご利用いただけます。右下のアイコンをクリックしてみてください。</p>
-    <a href="https://github.com/YUMAKAKEFUDA/at-parking-clone" class="redirect-link">GitHubリポジトリを見る</a>
-  </div>
+  
+  <nav class="main-nav">
+    <div class="container">
+      <ul class="nav-list">
+        <li class="nav-item"><a href="#">ご利用の流れ</a></li>
+        <li class="nav-item"><a href="#">よくあるご質問</a></li>
+        <li class="nav-item"><a href="#">複数台のお問い合わせ</a></li>
+        <li class="nav-item"><a href="#">会社概要</a></li>
+        <li class="nav-item"><a href="#">管理会社様向け</a></li>
+      </ul>
+    </div>
+  </nav>
+  
+  <main class="container">
+    <h1 class="main-heading">月極駐車場をお探しならアットパーキングにお任せください！</h1>
+    
+    <div class="search-section">
+      <div class="search-box">
+        <h2 class="search-heading">
+          <img src="https://www.at-parking.jp/img/search/search_icon.png" alt="検索" class="search-icon">
+          全国都道府県から月極駐車場を探す
+        </h2>
+        <p class="search-text">お探しのエリアをクリックして月極の駐車場物件を絞り込み検索ができます。</p>
+        <div class="current-parking">現在掲載中の月極駐車場</div>
+        <div class="parking-count">
+          <span>全国の駐車場件数</span>
+          <span class="count-number">55,273</span>
+          <span>件</span>
+        </div>
+      </div>
+      
+      <div class="japan-map">
+        <img src="https://www.at-parking.jp/img/search/japan_map.png" alt="日本地図" class="map-image">
+        <div class="region-links">
+          <!-- 各地域へのリンクマップ -->
+        </div>
+      </div>
+    </div>
+    
+    <div class="regions">
+      <div class="region hokkaido">
+        <h3 class="region-title">北海道</h3>
+        <ul class="prefecture-list">
+          <li class="prefecture-item"><a href="#" class="prefecture-link">北海道</a></li>
+        </ul>
+      </div>
+      
+      <div class="region tohoku">
+        <h3 class="region-title">東北</h3>
+        <ul class="prefecture-list">
+          <li class="prefecture-item"><a href="#" class="prefecture-link">青森</a></li>
+          <li class="prefecture-item"><a href="#" class="prefecture-link">秋田</a></li>
+          <li class="prefecture-item"><a href="#" class="prefecture-link">岩手</a></li>
+          <li class="prefecture-item"><a href="#" class="prefecture-link">山形</a></li>
+          <li class="prefecture-item"><a href="#" class="prefecture-link">宮城</a></li>
+          <li class="prefecture-item"><a href="#" class="prefecture-link">福島</a></li>
+        </ul>
+      </div>
+      
+      <div class="region koushinetsu">
+        <h3 class="region-title">甲信越北陸</h3>
+        <ul class="prefecture-list">
+          <li class="prefecture-item"><a href="#" class="prefecture-link">新潟</a></li>
+          <li class="prefecture-item"><a href="#" class="prefecture-link">福井</a></li>
+          <li class="prefecture-item"><a href="#" class="prefecture-link">富山</a></li>
+          <li class="prefecture-item"><a href="#" class="prefecture-link">山梨</a></li>
+          <li class="prefecture-item"><a href="#" class="prefecture-link">石川</a></li>
+          <li class="prefecture-item"><a href="#" class="prefecture-link">長野</a></li>
+        </ul>
+      </div>
+      
+      <div class="region kanto">
+        <h3 class="region-title">関東</h3>
+        <ul class="prefecture-list">
+          <li class="prefecture-item"><a href="#" class="prefecture-link">群馬</a></li>
+          <li class="prefecture-item"><a href="#" class="prefecture-link">埼玉</a></li>
+          <li class="prefecture-item"><a href="#" class="prefecture-link">栃木</a></li>
+          <li class="prefecture-item"><a href="#" class="prefecture-link">千葉</a></li>
+          <li class="prefecture-item"><a href="#" class="prefecture-link">茨城</a></li>
+          <li class="prefecture-item"><a href="#" class="prefecture-link">東京</a></li>
+          <li class="prefecture-item"><a href="#" class="prefecture-link">神奈川</a></li>
+        </ul>
+      </div>
+      
+      <div class="region tokai">
+        <h3 class="region-title">東海</h3>
+        <ul class="prefecture-list">
+          <li class="prefecture-item"><a href="#" class="prefecture-link">岐阜</a></li>
+          <li class="prefecture-item"><a href="#" class="prefecture-link">愛知</a></li>
+          <li class="prefecture-item"><a href="#" class="prefecture-link">静岡</a></li>
+          <li class="prefecture-item"><a href="#" class="prefecture-link">三重</a></li>
+        </ul>
+      </div>
+      
+      <div class="region kinki">
+        <h3 class="region-title">関西</h3>
+        <ul class="prefecture-list">
+          <li class="prefecture-item"><a href="#" class="prefecture-link">滋賀</a></li>
+          <li class="prefecture-item"><a href="#" class="prefecture-link">大阪</a></li>
+          <li class="prefecture-item"><a href="#" class="prefecture-link">京都</a></li>
+          <li class="prefecture-item"><a href="#" class="prefecture-link">兵庫</a></li>
+          <li class="prefecture-item"><a href="#" class="prefecture-link">奈良</a></li>
+          <li class="prefecture-item"><a href="#" class="prefecture-link">和歌山</a></li>
+        </ul>
+      </div>
+      
+      <div class="region chugoku">
+        <h3 class="region-title">中国</h3>
+        <ul class="prefecture-list">
+          <li class="prefecture-item"><a href="#" class="prefecture-link">鳥取</a></li>
+          <li class="prefecture-item"><a href="#" class="prefecture-link">岡山</a></li>
+          <li class="prefecture-item"><a href="#" class="prefecture-link">島根</a></li>
+          <li class="prefecture-item"><a href="#" class="prefecture-link">広島</a></li>
+          <li class="prefecture-item"><a href="#" class="prefecture-link">山口</a></li>
+        </ul>
+      </div>
+      
+      <div class="region shikoku">
+        <h3 class="region-title">四国</h3>
+        <ul class="prefecture-list">
+          <li class="prefecture-item"><a href="#" class="prefecture-link">香川</a></li>
+          <li class="prefecture-item"><a href="#" class="prefecture-link">徳島</a></li>
+          <li class="prefecture-item"><a href="#" class="prefecture-link">愛媛</a></li>
+          <li class="prefecture-item"><a href="#" class="prefecture-link">高知</a></li>
+        </ul>
+      </div>
+      
+      <div class="region kyushu">
+        <h3 class="region-title">九州</h3>
+        <ul class="prefecture-list">
+          <li class="prefecture-item"><a href="#" class="prefecture-link">大分</a></li>
+          <li class="prefecture-item"><a href="#" class="prefecture-link">福岡</a></li>
+          <li class="prefecture-item"><a href="#" class="prefecture-link">佐賀</a></li>
+          <li class="prefecture-item"><a href="#" class="prefecture-link">長崎</a></li>
+          <li class="prefecture-item"><a href="#" class="prefecture-link">熊本</a></li>
+          <li class="prefecture-item"><a href="#" class="prefecture-link">宮崎</a></li>
+          <li class="prefecture-item"><a href="#" class="prefecture-link">鹿児島</a></li>
+        </ul>
+      </div>
+      
+      <div class="region okinawa">
+        <h3 class="region-title">沖縄</h3>
+        <ul class="prefecture-list">
+          <li class="prefecture-item"><a href="#" class="prefecture-link">沖縄</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="search-help">
+      <img src="https://www.at-parking.jp/img/search/car_icon.png" alt="車アイコン" class="help-icon">
+      <div class="help-content">
+        <h3 class="help-title">どのような駐車場をお探しですか？</h3>
+        <p class="help-text">
+          アットパーキングの情報網で、お客様の駐車場探しのお手伝いをさせていただきます！<br>
+          お客様ご自身でエリア絞り込み検索が可能、または条件だけお伝え頂けましたらご希望に沿った駐車場を私達がお探しいたします。ご相談は無料！ぜひお気軽にご利用ください。
+        </p>
+      </div>
+    </div>
+    
+    <div class="search-section">
+      <div class="search-box" style="width: 100%;">
+        <!-- ここに追加コンテンツがあれば -->
+      </div>
+    </div>
+  </main>
 </body>
 </html>
