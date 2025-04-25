@@ -24,12 +24,12 @@ export default function RootLayout({
             __html: `
               window.difyChatbotConfig = {
                 token: 'InqwmyTUlceW5pJC',
-                baseUrl: 'http://dify.animastudio.jp'
+                baseUrl: 'https://dify.animastudio.jp'
               }
             `,
           }}
         />
-        <script src="http://dify.animastudio.jp/embed.min.js" id="InqwmyTUlceW5pJC" defer />
+        <script src="https://dify.animastudio.jp/embed.min.js" id="InqwmyTUlceW5pJC" defer />
         <style
           dangerouslySetInnerHTML={{
             __html: `
